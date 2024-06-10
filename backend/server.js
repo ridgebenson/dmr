@@ -5,6 +5,7 @@ const path = require('path');
 // const logger = require('./middleware/logger');
 const errorHandler = require('./middleware/errorHandler');  
 const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
 const cors = require('cors');
 const corsOptions = require('./config/corsOptions');
 const connectDB = require('./config/dbConn');
@@ -26,11 +27,15 @@ app.use(express.json());
 
 app.use(cookieParser());
 
+app.use(bodyParser.json({limit: '50mb'}));
+
 app.use(('/'),express.static(path.join(__dirname, '/public')));
 
 app.use('/',require('./routes/root'));
 
 app.use('/auth', require('./routes/authRoutes'));
+
+app.use(require('./routes/disasterRoutes'));
 
 // app.use('/users', require('./routes/userRoutes'));
 

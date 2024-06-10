@@ -2,23 +2,21 @@ const mongoose = require('mongoose');
 
 const disasterSchema = new mongoose.Schema(
     {
-        user: {
-            type: mongoose.Schema.Types.ObjectId,
-            required: true,
-            ref:'User'
+        // user: {
+        //     type: mongoose.Schema.Types.ObjectId,
+        //     required: true,
+        //     ref:'User'
+        // },
+        location: {
+          latitude: Number,
+          longitude: Number,
+          
         },
-        title: {
-            type: String,
-            required: true
-        },
-        text: {
-            type: String,
-            required: true
-        },
-        completed:{
-            type: Boolean,
-            default: false
-        }
+          reportedat: String,
+          disasterType: String,
+          description: String,
+          severity: String,
+          image: String
     },
     {
         timestamps: true
@@ -26,3 +24,4 @@ const disasterSchema = new mongoose.Schema(
 );
 
 module.exports = mongoose.model('Disaster', disasterSchema);
+  

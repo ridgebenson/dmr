@@ -297,7 +297,7 @@ ul li{
 
 /* Styling for disaster reporting */
 .dsReportingDiv{
-  width:auto;
+  width: auto;
   height:500px;
   border-radius: 10px;
   backdrop-filter: blur(10px);
@@ -318,8 +318,74 @@ ul li{
     height: 475px;
 }
 
+/* Disaster reporting form*/
+.dsr-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100%;
+    margin: 10px;
+
+}
+
+.reportDisaster-button{
+  display: inline-block;
+  border-radius: 25px;
+  background-color: #057DCD;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 15px;
+  padding: 15px;
+  width: fit-content;
+  transition: all 0.5s;
+  cursor: pointer;
+  /* margin: 5px; */
+  /* margin-left: 200px; */
+  /* margin-top: 30px; */
+}
+
+.reportDisaster-button:hover {
+  background-color: #0F172A;
+  color: #FFFFFF;
+}
+
 @keyframes carousel {
     0% { transform: translateX(0); }
     100% { transform: translateX(-100%); }
 }
 
+/* Disasters Div */
+.disastersDiv {
+  width: 80%;
+  margin: auto;
+  padding: 20px;
+}
+
+/* .dsReportingDiv h1 {
+  text-align: center;
+  color: #333;
+} */
+
+.disastersDiv ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.disastersDiv li {
+  border: 1px solid #ccc;
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.disastersDiv li h2 {
+  margin: 0 0 10px 0;
+  color: #333;
+}
+
+.disastersDiv li p {
+  margin: 0;
+  color: #666;
+}
