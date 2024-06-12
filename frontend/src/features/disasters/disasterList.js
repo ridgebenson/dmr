@@ -33,6 +33,7 @@ const DisasterList = () => {
                   height={100}
                   width={100}
                 />}
+                {/* <p>{disaster.location}</p> */}
                 {/* <img src={require(`../../uploads/${disaster.image}`)}></img> */}
                 {/* Add more disaster details here */}
               </li>

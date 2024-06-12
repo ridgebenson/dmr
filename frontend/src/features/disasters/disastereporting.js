@@ -7,13 +7,14 @@ const DisasterReporting = () => {
     const reportedat = new Intl.DateTimeFormat('en-US', { dateStyle: 'full',timeStyle:'long' }).format(date);
 
     const [disasterInfo, setDisasterInfo] = useState({
-        // location:{
-        //     latitude: null,
-        //     longitude: null
+       
+        // location: {
+        //     lat:null,
+        //     long:null  
         // },
         location: {
-            latitude: null,
-            longitude: null
+            type: 'Point',
+            coordinates: [0, 0]
         },
         reportedat,
         disasterType: '',
@@ -27,27 +28,29 @@ const DisasterReporting = () => {
         e.preventDefault();
       
         try {
-          await getLocation(); // Call getLocation first
+            // Call getLocation first and wait for it to finish
+            await getLocation();
+    
+            const formData = new FormData();
+            Object.keys(disasterInfo).forEach(key => {
+                if (key !== 'image') {
+                    formData.append(key, disasterInfo[key]);
+                }
+            });
+            formData.append('image', disasterInfo.image);
       
-          const formData = new FormData();
-          Object.keys(disasterInfo).forEach(key => {
-            if (key !== 'image') {
-              formData.append(key, disasterInfo[key]);
-            }
-          });
-          formData.append('image', disasterInfo.image);
-      
-          const res = await axios.post("http://localhost:5000/reportdisaster", formData, {
-            headers: {
-              'Content-Type': 'multipart/form-data'
-            }
-          });
-          console.log(res);
-          alert("Disaster reported successfully");
+            const res = await axios.post("http://localhost:5000/reportdisaster", formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            });
+            console.log(res);
+            alert("Disaster reported successfully");
         } catch (err) {
-          alert(err);
+            alert(err);
         }
-      };
+    };
+    
       
     
     const getLocation = () => {
@@ -57,9 +60,9 @@ const DisasterReporting = () => {
                     console.log(position);
                     setDisasterInfo({
                         ...disasterInfo,
-                        location:{
-                            latitude: position.coords.latitude,
-                            longitude: position.coords.longitude
+                        location: {
+                            type: 'Point',
+                            coordinates: [position.coords.longitude, position.coords.latitude]
                         }
                     });
                     resolve();
@@ -78,7 +81,7 @@ const DisasterReporting = () => {
         <div className="dsReportingDiv">
             <div className="disasterReporting-form">
                 <h2 style={{color:"#1B4552",textAlign:"center",marginTop:'5px'}}>Report a Disaster</h2>
-                <form className="dsr-form" onSubmit={handleSubmit}>
+                <form className="dsr-form" onSubmit={getLocation}>
                     <div className="form-group">
                         <label htmlFor="disasterType" className="form-label">
                             <strong>Disaster Type</strong>
@@ -141,7 +144,7 @@ const DisasterReporting = () => {
                         <label for="confirmation" class='form-label'>I confirm the accuracy of this report</label>
                     </div>
                     
-                    <button type="submit" className="reportDisaster-button" onClick={getLocation}>Report Disaster</button>
+                    <button type="submit" className="reportDisaster-button" onClick={handleSubmit}>Report Disaster</button>
                 </form>
             </div>
         </div>

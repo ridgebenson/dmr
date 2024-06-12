@@ -7,11 +7,19 @@ const disasterSchema = new mongoose.Schema(
         //     required: true,
         //     ref:'User'
         // },
-        location: {
-          latitude: Number,
-          longitude: Number,
+        
           
-        },
+          location: {
+            type: {
+              type: String,
+              enum: ['Point'],
+              required: true
+            },
+            coordinates: {
+              type: [Number],
+              required: true
+            }
+          },
           reportedat: String,
           disasterType: String,
           description: String,
