@@ -1,7 +1,12 @@
 const Disaster = require('../models/Disaster');
 
 const reportDisaster = async(req, res) => {
-    const { reportedat, disasterType, description, severity, location, image } = req.body;
+    const { reportedat, disasterType, description, severity, image, locationType, locationCoordinates } = req.body;
+    
+    const location = {
+        type: locationType,
+        coordinates: JSON.parse(locationCoordinates)
+    };
 
     if(!location ||!reportedat ||!disasterType ||!description ||!severity) {
         return res.status(400).json({message: 'All fields are required'});
@@ -11,7 +16,7 @@ const reportDisaster = async(req, res) => {
         const newDisaster = new Disaster({
             location: {
                 type: 'Point',
-                coordinates: [location.longitude, location.latitude]
+                coordinates: location.coordinates
             },
             reportedat,
             disasterType,

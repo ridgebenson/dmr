@@ -28,13 +28,14 @@ const DisasterList = () => {
                 <h2>{disaster.disasterType}</h2>
                 <p>{disaster.description}</p>
                 <p>{disaster.severity}</p>
+                {disaster.location && disaster.location.coordinates && (
+                  <p>Location: {disaster.location.coordinates[1]}, {disaster.location.coordinates[0]}</p>
+                )}
                 {disaster.image && <img src={require(`../../uploads/${disaster.image}`)} 
                   alt="Disaster" 
                   height={100}
                   width={100}
                 />}
-                {/* <p>{disaster.location}</p> */}
-                {/* <img src={require(`../../uploads/${disaster.image}`)}></img> */}
                 {/* Add more disaster details here */}
               </li>
             ))}

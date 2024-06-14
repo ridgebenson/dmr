@@ -7,11 +7,6 @@ const DisasterReporting = () => {
     const reportedat = new Intl.DateTimeFormat('en-US', { dateStyle: 'full',timeStyle:'long' }).format(date);
 
     const [disasterInfo, setDisasterInfo] = useState({
-       
-        // location: {
-        //     lat:null,
-        //     long:null  
-        // },
         location: {
             type: 'Point',
             coordinates: [0, 0]
@@ -26,62 +21,71 @@ const DisasterReporting = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-      
+    
         try {
-            // Call getLocation first and wait for it to finish
-            await getLocation();
+            const coordinates = await getLocation();
+    
+            // Update the disasterInfo state with the new location
+            const updatedDisasterInfo = {
+                ...disasterInfo,
+                location: {
+                    type: 'Point',
+                    coordinates: [coordinates[0], coordinates[1]]
+                }
+            };
     
             const formData = new FormData();
-            Object.keys(disasterInfo).forEach(key => {
+            
+            formData.append('locationType', updatedDisasterInfo.location.type);
+            formData.append('locationCoordinates', JSON.stringify(updatedDisasterInfo.location.coordinates));
+
+        
+            Object.keys(updatedDisasterInfo).forEach(key => {
                 if (key !== 'image') {
-                    formData.append(key, disasterInfo[key]);
+                    formData.append(key, updatedDisasterInfo[key]);
                 }
             });
-            formData.append('image', disasterInfo.image);
-      
+            formData.append('image', updatedDisasterInfo.image);
+            
+
+    
             const res = await axios.post("http://localhost:5000/reportdisaster", formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
             });
             console.log(res);
+            console.log(coordinates);
             alert("Disaster reported successfully");
         } catch (err) {
             alert(err);
         }
     };
     
-      
     
+
     const getLocation = () => {
         return new Promise((resolve, reject) => {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition((position)=>{
-                    console.log(position);
-                    setDisasterInfo({
-                        ...disasterInfo,
-                        location: {
-                            type: 'Point',
-                            coordinates: [position.coords.longitude, position.coords.latitude]
-                        }
-                    });
-                    resolve();
-                });
-            } else {
-                alert("Geolocation is not supported by this browser.");
-                reject();
-            }
+          if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition((position) => {
+              const coordinates = [position.coords.latitude, position.coords.longitude];
+              resolve(coordinates); // return the coordinates as a promise
+            }, (error) => {
+              reject(error);
+            });
+          } else {
+            reject("Geolocation is not supported by this browser.");
+          }
         });
-    }
-    
-    
+      };
+     
 
     const content = (
         <>
         <div className="dsReportingDiv">
             <div className="disasterReporting-form">
                 <h2 style={{color:"#1B4552",textAlign:"center",marginTop:'5px'}}>Report a Disaster</h2>
-                <form className="dsr-form" onSubmit={getLocation}>
+                <form className="dsr-form" onSubmit={handleSubmit}>
                     <div className="form-group">
                         <label htmlFor="disasterType" className="form-label">
                             <strong>Disaster Type</strong>
@@ -139,12 +143,12 @@ const DisasterReporting = () => {
                         />
                     </div>
 
-                    <div class="form-group">
+                    <div className="form-group">
                         <input type="checkbox" id="confirmation" required/>
-                        <label for="confirmation" class='form-label'>I confirm the accuracy of this report</label>
+                        <label htmlFor="confirmation" className='form-label'>I confirm the accuracy of this report</label>
                     </div>
                     
-                    <button type="submit" className="reportDisaster-button" onClick={handleSubmit}>Report Disaster</button>
+                    <button type="submit" className="reportDisaster-button">Report Disaster</button>
                 </form>
             </div>
         </div>
