@@ -35,7 +35,7 @@ const DisasterReporting = () => {
             };
     
             const formData = new FormData();
-            
+
             formData.append('locationType', updatedDisasterInfo.location.type);
             formData.append('locationCoordinates', JSON.stringify(updatedDisasterInfo.location.coordinates));
 
@@ -145,7 +145,7 @@ const DisasterReporting = () => {
 
                     <div className="form-group">
                         <input type="checkbox" id="confirmation" required/>
-                        <label htmlFor="confirmation" className='form-label'>I confirm the accuracy of this report</label>
+                        <label htmlFor="confirmation" className='form-label' required>I confirm the accuracy of this report</label>
                     </div>
                     
                     <button type="submit" className="reportDisaster-button">Report Disaster</button>

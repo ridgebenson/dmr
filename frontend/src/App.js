@@ -7,7 +7,7 @@ import DashLayout from './components/dashLayout';
 import DisasterReporting from './features/disasters/disastereporting';
 import DisasterList from './features/disasters/disasterList';
 //import UsersList from './features/users/usersList';
-
+import DisasterDetail from './features/disasters/disasterDetail';
 
 function App() {
   return (
@@ -22,6 +22,7 @@ function App() {
 
           <Route path = 'disasters'>
             <Route index element = {<DisasterList />} />
+            <Route path = ':id' element = {<DisasterDetail />} />
           </Route>
 
           {/* <Route path = 'users'>
