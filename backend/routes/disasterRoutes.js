@@ -36,4 +36,13 @@ router.get('/disasters', async (req, res) => {
     }
 });
 
+router.get('/disasters/:id', async (req, res) => {
+    try {
+        await disasterController.getDisasterById(req, res);
+    }
+    catch (err) {
+        console.log(err);
+    }
+});
+
 module.exports = router;

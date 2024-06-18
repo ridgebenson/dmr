@@ -43,11 +43,8 @@ const DisasterList = () => {
                   <td>{disaster.location && disaster.location.coordinates ? `Location: ${disaster.location.coordinates[1]}, ${disaster.location.coordinates[0]}` : 'N/A'}</td>
                   <td>{disaster.image ? <img src={require(`../../uploads/${disaster.image}`)} alt="Disaster" height={100} width={100} /> : 'N/A'}</td>
                   <td>
-                    {/* <Link to={`/disasters/${disaster._id}`}> */}
-                    {/* <Link to={`/disasters/${disaster._id}`}>
-                      <button className="takeActionBtn">Take Action</button>
-                    </Link> */}
-                    <Link to={{ pathname: `/disasters/${disaster._id}`, state: { id: disaster._id } }}>
+                    
+                    <Link to={{ pathname: `../disasters/${disaster._id}`, state: { id: disaster._id } }}>
                       <button className="takeActionBtn">Take Action</button>
                     </Link>
                   </td>

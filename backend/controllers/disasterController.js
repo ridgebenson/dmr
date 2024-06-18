@@ -41,8 +41,21 @@ const getDisasters = async(req, res) => {
     }
 };
 
+const getDisasterById = async(req, res) => {
+    try {
+        const disaster = await Disaster.findById(req.params.id);
+        if(!disaster) {
+            return res.status(404).json({message: 'Disaster not found'});
+        }
+        res.json(disaster);
+    } catch (err) {
+        res.status(500).json({message: 'Server Error'});
+    }
+}
+
 module.exports = {
     reportDisaster,
-    getDisasters
+    getDisasters,
+    getDisasterById
 };
     

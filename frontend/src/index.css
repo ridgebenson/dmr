@@ -449,3 +449,58 @@ ul li{
   background-color: #0F172A;
   color: #FFFFFF;
 }
+
+/* Disaster Details Page */
+.disasterDetailMainDiv{
+  display: flex;
+  justify-content: space-between; /* Changed from align-items */
+  height: 50vh;
+  margin: 10px auto;
+
+}
+
+.disasterImageDiv{
+  width: 20%;
+  height: 100%;
+  
+  /* border-radius: 10px; */
+  /* border:#057DCD 2px solid; */
+}
+
+.disasterInfoDiv{
+  width: 50%;
+  height: 75%;
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
+  border: #057DCD 2px solid;
+  display: flex; /* Added this to align items vertically */
+  flex-direction: column; /* Added this to align items vertically */
+  /* Added this to center items vertically */
+  /* justify-content: center;  */
+  
+}
+
+.disasterInfoDiv > div {
+  padding: 20px;
+  display: flex;
+  flex-direction: row; /* Align h2 and p elements in a row */
+  justify-content: space-between; /* Adjust this as needed */
+  align-items: center; /* Align items vertically */
+}
+
+.disasterInfoDiv h2{
+  color: rgb(27, 40, 223);
+}
+
+.disasterInfoDiv p{
+  color: #1B4552;
+  font-size: 1.2rem;
+}
+
+.disasterImage{
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  /* padding: 10px; */
+}
+
