@@ -29,8 +29,8 @@ const DisasterList = () => {
                 <th>Type</th>
                 <th>Description</th>
                 <th>Severity</th>
-                <th>Location</th>
-                <th>Image</th>
+                {/* <th>Coordinates</th>
+                <th>Image</th> */}
                 <th>Take Action</th>
               </tr>
             </thead>
@@ -40,8 +40,8 @@ const DisasterList = () => {
                   <td>{disaster.disasterType}</td>
                   <td>{disaster.description}</td>
                   <td>{disaster.severity}</td>
-                  <td>{disaster.location && disaster.location.coordinates ? `Location: ${disaster.location.coordinates[1]}, ${disaster.location.coordinates[0]}` : 'N/A'}</td>
-                  <td>{disaster.image ? <img src={require(`../../uploads/${disaster.image}`)} alt="Disaster" height={100} width={100} /> : 'N/A'}</td>
+                  {/* <td>{disaster.location && disaster.location.coordinates ? `Lat: ${disaster.location.coordinates[0]}  Long: ${disaster.location.coordinates[1]}` : 'N/A'}</td>
+                  <td>{disaster.image ? <img src={require(`../../uploads/${disaster.image}`)} alt="Disaster" height={100} width={100} /> : 'N/A'}</td> */}
                   <td>
                     
                     <Link to={{ pathname: `../disasters/${disaster._id}`, state: { id: disaster._id } }}>

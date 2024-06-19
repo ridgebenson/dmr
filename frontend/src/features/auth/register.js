@@ -9,6 +9,7 @@ const Register = () => {
     const [username,setUsername] = useState('');
     const [email,setEmail] = useState('');
     const [password,setPassword] = useState('');
+    const [role,setRole] = useState('user');
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
@@ -18,6 +19,7 @@ const Register = () => {
                 username,
                 email,
                 password,
+                role,
             });
             res.data && navigate("/login");
         } catch (err) {
@@ -72,6 +74,30 @@ const Register = () => {
                             className="form-control"
                             onChange={(e) => setPassword(e.target.value)}
                         />
+                    </div>
+                    <div className="admin-user">
+                        <label htmlFor="admin" className="form-label">
+                            Admin
+                        </label>
+                        <input
+                            type="radio"
+                            name="role"
+                            value="admin"
+                            className="form-control"
+                            checked={role === "admin"}
+                            onChange={(e) => setRole(e.target.value)}
+                            />
+                        <label htmlFor="user" className="form-label">
+                            User
+                        </label>
+                        <input
+                            type="radio"
+                            name="role"
+                            value="user"
+                            className="form-control"
+                            checked={role === "user"}
+                            onChange={(e) => setRole(e.target.value)}/>
+                            
                     </div>
                     <button type="submit" className="login-button">
                         Register

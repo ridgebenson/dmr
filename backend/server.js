@@ -13,7 +13,7 @@ const mongoose = require('mongoose');
 const {logger,logEvents} = require('./middleware/logger');
 const port = process.env.PORT || 5000;
 
-const UserRouter = require('./routes/userRoutes')
+// const UserRouter = require('./routes/userRoutes')
 
 console.log(process.env.NODE_ENV);
 

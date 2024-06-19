@@ -2,6 +2,8 @@
 import { useState } from 'react';
 import axios from 'axios';
 
+// const transporter = require('../../utils/email');
+
 const DisasterReporting = () => {
     const date = new Date();
     const reportedat = new Intl.DateTimeFormat('en-US', { dateStyle: 'full',timeStyle:'long' }).format(date);
@@ -56,6 +58,14 @@ const DisasterReporting = () => {
             });
             console.log(res);
             console.log(coordinates);
+
+            // await transporter.sendMail({
+            //     from: 'ridgemuturi@gmail.com',
+            //     to: 'bbitclass25@gmail.com',
+            //     subject: 'New Disaster Reported',
+            //     text: `A new disaster was reported at ${reportedat}. Type: ${disasterInfo.disasterType}`,
+            // });
+
             alert("Disaster reported successfully");
         } catch (err) {
             alert(err);

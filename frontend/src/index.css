@@ -239,7 +239,8 @@ ul li{
   justify-content: center;
   align-items: center;
   height: 50vh;
-  margin: 45px auto;
+  /* margin: 45px auto; */
+  margin-top: 50px;
 }
 
 .loginMajor{
@@ -488,6 +489,11 @@ ul li{
   align-items: center; /* Align items vertically */
 }
 
+.disasterInfoDiv > div > p {
+  margin: 0;
+  text-align: center;
+}
+
 .disasterInfoDiv h2{
   color: rgb(27, 40, 223);
 }
@@ -504,3 +510,18 @@ ul li{
   /* padding: 10px; */
 }
 
+/* Admin */
+.admin-user {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px 0;
+}
+
+.admin-user .form-label {
+  margin: 0 10px;
+}
+
+.admin-user .form-control {
+  margin-right: 20px;
+}

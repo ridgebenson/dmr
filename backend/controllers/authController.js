@@ -5,7 +5,7 @@ const asyncHandler = require('express-async-handler');
 
 // @desc register
 const register = asyncHandler(async(req,res) => {
-    const { username, password, email } = req.body;
+    const { username, password, email, role } = req.body;
 
     if(!username || !password || !email) {
         return res.status(400).json({message: 'All fields are required'});
@@ -22,8 +22,8 @@ const register = asyncHandler(async(req,res) => {
     const newUser = new User({
         username,
         password: hashedPassword,
-        email
-        // role
+        email,
+        role:[]
     });
 
     await newUser.save();

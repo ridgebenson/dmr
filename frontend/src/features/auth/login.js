@@ -62,6 +62,22 @@ const Login = () => {
                                 onChange={(e) => setPassword(e.target.value)}
                             />
                         </div>
+                        <div className="admin-user">
+                            <label htmlFor="admin" className="form-label">
+                                Admin
+                            </label>
+                            <input
+                                type="radio"
+                                name="admin"
+                                className="form-control"/>
+                                <label htmlFor="user" className="form-label">
+                                    User
+                                </label>
+                                <input
+                                    type="radio"
+                                    name="admin"
+                                    className="form-control"/>
+                        </div>
                         <button type="submit" className="login-button">
                             Login
                         </button>
