@@ -76,23 +76,23 @@ const Register = () => {
                         />
                     </div>
                     <div className="admin-user">
-                        <label htmlFor="admin" className="form-label">
+                        <label htmlFor="adminRadio" className="form-label">
                             Admin
                         </label>
                         <input
                             type="radio"
-                            name="role"
+                            name="adminRadio"
                             value="admin"
                             className="form-control"
                             checked={role === "admin"}
                             onChange={(e) => setRole(e.target.value)}
                             />
-                        <label htmlFor="user" className="form-label">
+                        <label htmlFor="userRadio" className="form-label">
                             User
                         </label>
                         <input
                             type="radio"
-                            name="role"
+                            name="userRadio"
                             value="user"
                             className="form-control"
                             checked={role === "user"}

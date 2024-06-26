@@ -1,4 +1,5 @@
 const Disaster = require('../models/Disaster');
+//const nodemailer = require('nodemailer');
 
 const reportDisaster = async(req, res) => {
     const { reportedat, disasterType, description, severity, image, locationType, locationCoordinates } = req.body;
@@ -26,6 +27,25 @@ const reportDisaster = async(req, res) => {
         });
 
         await newDisaster.save();
+
+        // //send email notification 
+        // const transporter = nodemailer.createTransport({
+        //     host: 'smtp.gmail.com',
+        //     port: 587,
+        //     secure: false,
+        //     auth: {
+        //         user: process.env.EMAIL,
+        //         pass: process.env.PASSWORD
+        //     }
+        // });
+
+        // await transporter.nodemailer({
+        //     from: 'ridgemuturi@gmail.com',
+        //     to: 'bbitclass25@gmail.com',
+        //     subject: 'New Disaster Reported',
+        //     text: `A new disaster was reported at ${reportedat}. Type: ${disasterType}`,
+        //  });
+            
         res.status(201).json({message: 'Disaster reported'});
     } catch(err) {
         res.status(500).json({message: 'Server Error'});

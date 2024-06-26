@@ -1,6 +1,7 @@
 // import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import axios from 'axios';
+//import transporter from '../../utils/email.js';
 
 // const transporter = require('../../utils/email');
 
@@ -59,12 +60,12 @@ const DisasterReporting = () => {
             console.log(res);
             console.log(coordinates);
 
-            // await transporter.sendMail({
+            //    await transporter.sendMail({
             //     from: 'ridgemuturi@gmail.com',
             //     to: 'bbitclass25@gmail.com',
             //     subject: 'New Disaster Reported',
             //     text: `A new disaster was reported at ${reportedat}. Type: ${disasterInfo.disasterType}`,
-            // });
+            //  });
 
             alert("Disaster reported successfully");
         } catch (err) {
