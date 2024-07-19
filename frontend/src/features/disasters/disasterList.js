@@ -8,7 +8,11 @@ const DisasterList = () => {
   useEffect(() => {
     const fetchDisasters = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/disasters');
+        const response = await axios.get('http://localhost:5000/disasters',{
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+          }
+        });
         setDisasters(response.data.reverse());
       } catch (error) {
         console.error("Error fetching data: ", error);
@@ -19,8 +23,9 @@ const DisasterList = () => {
   }, []);
 
   return (
-    <div className="dsReportingDiv">
-      <h1 style={{color:"#1B4552",textAlign:"center",marginTop:'5px'}}>Reported Disasters</h1>
+    <>
+    {/* <div className="dsReportingDiv"> */}
+      <h1 style={{color:"rgb(27, 40, 223)",textAlign:"center",marginTop:'5px'}}>Reported Disasters</h1>
       <div className="disastersDiv">
         {disasters.length > 0 ? (
           <table className="disasterTable">
@@ -56,8 +61,8 @@ const DisasterList = () => {
           <p>No disasters reported.</p>
         )}
       </div>
-    </div>
-  );
+    {/* </div> */}
+  </>);
 };
 
 export default DisasterList;

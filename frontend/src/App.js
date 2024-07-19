@@ -9,6 +9,7 @@ import UserDashboard from './features/users/UserDashboard';
 import DisasterReporting from './features/disasters/disastereporting';
 import DisasterList from './features/disasters/disasterList';
 import DisasterDetail from './features/disasters/disasterDetail';
+import UserDisasters from './features/users/UserDisasters';
 
 function App() {
   return (
@@ -25,13 +26,15 @@ function App() {
           </Route>
 
           <Route path="disasters">
-          <Route path=":id" element={<DisasterDetail />} />
+            <Route path=":id" element={<DisasterDetail />} />
           </Route> 
 
           
 
           <Route path="user" element={<UserDashboard />}>
             <Route index element={<DisasterReporting />} />
+            <Route path='disasters' element={<UserDisasters />} />
+            <Route path="disasters/:id" element={<DisasterDetail />} />
           </Route>
         </Route>
       </Route>

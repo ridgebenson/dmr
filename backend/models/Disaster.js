@@ -7,7 +7,11 @@ const disasterSchema = new mongoose.Schema(
         //     required: true,
         //     ref:'User'
         // },
-        
+
+          user:{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User',
+          },
           
           location: {
             type: {

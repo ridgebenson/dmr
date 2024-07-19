@@ -18,14 +18,33 @@ const Login = () => {
                 email,
                 password,
             });
-            if (res.data) {
-                if(role === 'admin'){
-                    navigate("/dash/admin");
-                }else{
-                    navigate("/dash/user");
+
+            // console.log(res.data);
+            if(res.data?.accessToken){
+                localStorage.setItem("token", res.data.accessToken);
+
+                const getUserIdFromToken = (token) => {
+                    const payload = token.split('.')[1];
+                    const decodedPayload = atob(payload);
+                    const userId = JSON.parse(decodedPayload).UserInfo.userId;
+                    return userId;
+                };
+
+                const userId = getUserIdFromToken(res.data.accessToken);
+                // console.log(userId);
+                localStorage.setItem('userId', userId);
+                
+                if (res.data) {
+                    if(role === 'admin'){
+                        navigate("/dash/admin");
+                    }else{
+                        navigate("/dash/user");
+                    }
+                   
                 }
-               
             }
+
+            
         } catch (err) {
             console.log(err);
             setLoginError(true); // Show error message

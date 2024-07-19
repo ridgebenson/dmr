@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-// import { OPENCAGE_API_KEY } from "../../config";
-// import { OPENCAGE_API_KEY } from "../../../env";
 import { OPENCAGE_API_KEY } from "../../utils/config";
 
 
@@ -10,24 +8,16 @@ const DisasterDetail = () => {
     const { id } = useParams();
     const [disaster, setDisaster] = useState(null);
     
-    // useEffect(() => {
-    //     const fetchDisaster = async () => {
-    //         try {
-    //             const response = await axios.get(`http://localhost:5000/disasters/${id}`);
-    //             setDisaster(response.data);
-    //         } catch (error) {
-    //             console.error("Error fetching data: ", error);
-    //         }
-    //     };
-    
-    //     fetchDisaster();
-    // }, [id]);
     
     useEffect(() => {
         const fetchDisaster = async () => {
             try {
                 // Fetch disaster data
-                const response = await axios.get(`http://localhost:5000/disasters/${id}`);
+                const response = await axios.get(`http://localhost:5000/disasters/${id}`,{
+                    headers: {
+                      'Authorization': `Bearer ${localStorage.getItem('token')}`
+                    }
+                  });
                 setDisaster(response.data);
     
                 // Check if location coordinates are available
@@ -64,7 +54,7 @@ const DisasterDetail = () => {
                     <div className="disasterImageDiv">
                         <h2 style={{color:"#1B4552",textAlign:"center",marginTop:'0px',padding:"10px"}}>Image</h2>
                         {disaster.image ? (
-                            <img src={require(`../../uploads/${disaster.image}`)} alt="Disaster Image" className="disasterImage" />
+                            <img src={require(`../../uploads/${disaster.image}`)} alt="Disaster" className="disasterImage" />
                         ) : (
                             'N/A'
                         )}
@@ -80,11 +70,6 @@ const DisasterDetail = () => {
                         </div>
                         <div>
                             <h2>Location</h2>
-                            {/* {disaster.location && disaster.location.coordinates ? (
-                            <p>{disaster.location.coordinates[0]}, {disaster.location.coordinates[1]}</p>
-                            ) : (
-                            'N/A'
-                            )} */}
                             {disaster.formattedAddress ? (
                                 <p>{disaster.formattedAddress}</p>
                             ) : (
@@ -100,9 +85,6 @@ const DisasterDetail = () => {
                 <p>Loading...</p>
             )}
         </>
-        // <div className="dsReportingDiv">
-            
-        /* </div> */
     );
 };
 

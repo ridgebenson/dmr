@@ -54,16 +54,20 @@ const login = asyncHandler(async(req, res)=>{
     const accessToken = jwt.sign(
         {
             "UserInfo":{
+                "userId":foundUser._id,
                 "email":foundUser.email,
                 "roles":foundUser.role
             }
         },
         process.env.ACCESS_TOKEN_SECRET,
-        {expiresIn: '30s'}
+        {expiresIn: '15m'}
     )
 
     const refreshToken = jwt.sign(
-        {"email":foundUser.email},
+        {
+            "email":foundUser.email,
+            "userId":foundUser._id
+        },
         process.env.REFRESH_TOKEN_SECRET,
         {expiresIn:'1d'}
     )
@@ -104,12 +108,13 @@ const refresh = (req,res) => {
             const accessToken = jwt.sign(
                 {
                     "UserInfo":{
+                        "userId":foundUser._id,
                         "username":foundUser.username,
                         "roles":foundUser.role
                     }
                 },
                     process.env.ACCESS_TOKEN_SECRET,
-                    {expiresIn:'30s'}
+                    {expiresIn:'15m'}
             )
             res.json({accessToken});
         })

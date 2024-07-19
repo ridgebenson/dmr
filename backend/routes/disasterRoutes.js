@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const disasterController = require('../controllers/disasterController');
+const authMiddleware = require('../middleware/verifyJWT');
 const multer = require('multer');
 
 const storage = multer.diskStorage({
@@ -15,12 +16,13 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
+router.use(authMiddleware);
 
 router.post('/reportdisaster', upload.single('image'), async (req, res) => {
     const imageName = req.file.filename;
     req.body.image = imageName;
     try {
-        await disasterController.reportDisaster(req, res);
+        await authMiddleware,disasterController.reportDisaster(req, res);
     }
     catch (err) {
         console.log(err);
@@ -29,7 +31,7 @@ router.post('/reportdisaster', upload.single('image'), async (req, res) => {
 
 router.get('/disasters', async (req, res) => {
     try {
-        await disasterController.getDisasters(req, res);
+        await authMiddleware,disasterController.getDisasters(req, res);
     }
     catch (err) {
         console.log(err);
@@ -39,6 +41,15 @@ router.get('/disasters', async (req, res) => {
 router.get('/disasters/:id', async (req, res) => {
     try {
         await disasterController.getDisasterById(req, res);
+    }
+    catch (err) {
+        console.log(err);
+    }
+});
+
+router.get('/disasters/user/:userId', async (req, res) => {
+    try {
+        await disasterController.getUserDisasters(req, res);
     }
     catch (err) {
         console.log(err);

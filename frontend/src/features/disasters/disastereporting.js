@@ -50,11 +50,16 @@ const DisasterReporting = () => {
             });
             formData.append('image', updatedDisasterInfo.image);
             
-
+            const token = localStorage.getItem('token');
+            if (!token) {
+                alert('You need to be logged in to report a disaster');
+                return;
+            };
     
             const res = await axios.post("http://localhost:5000/reportdisaster", formData, {
                 headers: {
-                    'Content-Type': 'multipart/form-data'
+                    'Content-Type': 'multipart/form-data',
+                    'Authorization': `Bearer ${token}` // Include the token in the headers
                 }
             });
             console.log(res);
