@@ -10,6 +10,7 @@ import DisasterReporting from './features/disasters/disastereporting';
 import DisasterList from './features/disasters/disasterList';
 import DisasterDetail from './features/disasters/disasterDetail';
 import UserDisasters from './features/users/UserDisasters';
+import UserDisasterDetail from './features/disasters/userDisasterDetail';
 
 function App() {
   return (
@@ -34,7 +35,7 @@ function App() {
           <Route path="user" element={<UserDashboard />}>
             <Route index element={<DisasterReporting />} />
             <Route path='disasters' element={<UserDisasters />} />
-            <Route path="disasters/:id" element={<DisasterDetail />} />
+            <Route path="disasters/:id" element={<UserDisasterDetail />} />
           </Route>
         </Route>
       </Route>

@@ -56,4 +56,13 @@ router.get('/disasters/user/:userId', async (req, res) => {
     }
 });
 
+router.put('/disasters/:id', upload.single('image'), async (req, res) => {
+    try {
+        await disasterController.updateDisaster(req, res);
+    }
+    catch (err) {
+        console.log(err);
+    }
+});
+
 module.exports = router;
