@@ -37,6 +37,14 @@ app.use('/auth', require('./routes/authRoutes'));
 
 app.use(require('./routes/disasterRoutes'));
 
+app.use('/disasters', require('./routes/resourceRoutes'));
+
+app.use('/disasters', require('./routes/reportRoutes'));
+
+app.use('/disasters', require('./routes/downloadReportRoutes'));
+
+// app.use(require('./routes/resourceRoutes'));
+
 // app.use('/users', require('./routes/userRoutes'));
 
 app.all('*', (req, res) => {

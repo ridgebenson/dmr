@@ -11,6 +11,8 @@ import DisasterList from './features/disasters/disasterList';
 import DisasterDetail from './features/disasters/disasterDetail';
 import UserDisasters from './features/users/UserDisasters';
 import UserDisasterDetail from './features/disasters/userDisasterDetail';
+import ResourceForm from './features/disasters/disasterResource';
+import ReportForm from './features/disasters/disasterReportForm';
 
 function App() {
   return (
@@ -28,6 +30,8 @@ function App() {
 
           <Route path="disasters">
             <Route path=":id" element={<DisasterDetail />} />
+            <Route path=":id/resources" element={<ResourceForm />} />
+            <Route path=":id/report" element={<ReportForm />} />
           </Route> 
 
           
